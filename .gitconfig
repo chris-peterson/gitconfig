@@ -30,19 +30,6 @@
 	keepBackup = false
 
 [alias]
-	# adapted from
-	# * https://duncanlock.net/blog/2021/11/01/git-up-alias-that-works-for-any-default-branch
-	# * https://medium.com/@vitalyb/creating-powerful-git-aliases-3dfc0efc9a31
-	main = !"git remote show origin | grep 'HEAD branch' | awk -F ':' '{print $(NF)}' | sed 's/^[ \t]*//'"
-	up = "!f() { \
-		git switch $(git main); \
-		git pull --prune; \
-		git checkout @{-1}; \
-	}; \
-	f"
-	web = "!f() { \
-		if [ $(git rev-parse --is-inside-work-tree) == 'true' ]; then \
-  			open \"https://$(git remote get-url origin | sed 's/git@//' | sed 's/\\.git//' | sed 's/:/\\//' )\"; \
-		fi; \
-	}; \
-	f"
+	main = !"git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
+	up = !"git switch $(git main) && git pull --prune && git switch @{-1}"
+	web = "!git rev-parse --is-inside-work-tree >/dev/null && open \"https://$(git remote get-url origin | sed 's/git@//' | sed 's/\\.git//' | sed 's/:/\\//' )\""
