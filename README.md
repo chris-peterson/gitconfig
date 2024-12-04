@@ -23,7 +23,7 @@ Update repository (main/default branch) and prune remotes
 
 Navigate to the web UX (e.g. on GitHub/GitLab, etc)
 
-## Git Workflow
+## My Git Workflow
 
 This is not meant to be prescriptive, this is just how _I_ use `git`.  Sharing in case others find it useful.
 
