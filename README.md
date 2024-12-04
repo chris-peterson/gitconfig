@@ -11,7 +11,7 @@ After making any changes, `./update.sh` to take effect.
 
 ### Aliases
 
-#### `main-branch`
+#### `main`
 
 Print out the main/default branch
 
