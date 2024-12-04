@@ -32,4 +32,4 @@
 [alias]
 	main = !"git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
 	up = !"git switch $(git main) && git pull --prune && git switch @{-1}"
-	web = "!git rev-parse --is-inside-work-tree >/dev/null && open \"https://$(git remote get-url origin | sed 's/git@//' | sed 's/\\.git//' | sed 's/:/\\//' )\""
+	web = !"git rev-parse --is-inside-work-tree >/dev/null && open \"https://$(git remote get-url origin | sed 's/git@//' | sed 's/\\.git//' | sed 's/:/\\//' )\""
