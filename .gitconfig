@@ -1,0 +1,43 @@
+[user]
+	name = Chris Peterson
+	email = chrispeterson@fastmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
+	autocrlf = input
+
+[push]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+	autoSetupRemote = true
+
+[pull]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase
+	rebase = true
+
+[rebase]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoStash
+	autoStash = true
+
+[merge]
+	# https://invent.kde.org/sdk/kdiff3
+	tool = kdiff3
+
+[mergetool]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolkeepBackup
+	keepBackup = false
+
+[alias]
+	# adapted from https://duncanlock.net/blog/2021/11/01/git-up-alias-that-works-for-any-default-branch
+	main-branch = !"git remote show origin | grep 'HEAD branch' | awk -F ':' '{print $(NF)}' | sed 's/^[ \t]*//'"
+
+	up = !"git switch $(git main-branch) && git pull --prune"
+
+	web = "!f() { \
+		if [ $(git rev-parse --is-inside-work-tree) == 'true' ]; then \
+  			open \"https://$(git remote get-url origin | sed 's/git@//' | sed 's/\\.git//' | sed 's/:/\\//' )\"; \
+		fi; \
+	}; \
+	f"
