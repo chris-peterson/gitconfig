@@ -7,6 +7,22 @@ A tabbed config file, make edits with your favorite text editor.
 
 After making any changes, `./update.sh` to take effect.
 
+## Features
+
+### Aliases
+
+#### `main-branch`
+
+Print out the main/default branch
+
+#### `up`
+
+Update repository (main/default branch) and prune remotes
+
+#### `web`
+
+Navigate to the web UX (e.g. on GitHub/GitLab, etc)
+
 ## Git Workflow
 
 This is not meant to be prescriptive, this is just how _I_ use `git`.  Sharing in case others find it useful.
