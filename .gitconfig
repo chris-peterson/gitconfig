@@ -21,8 +21,12 @@
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoStash
 	autoStash = true
 
+[diff]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool
+	tool = kdiff3
+
 [merge]
-	# https://invent.kde.org/sdk/kdiff3
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool
 	tool = kdiff3
 
 [mergetool]
