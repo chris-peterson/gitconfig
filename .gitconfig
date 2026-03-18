@@ -1,6 +1,15 @@
 [user]
 	name = Chris Peterson
-	email = chrispeterson@fastmail.com
+
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-includeIfltconditiongt
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+	path = ~/.gitconfig-public
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+	path = ~/.gitconfig-public
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+	path = ~/.gitconfig-public
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
+	path = ~/.gitconfig-public
 
 [init]
 	defaultBranch = main
