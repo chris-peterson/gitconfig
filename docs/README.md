@@ -1,4 +1,4 @@
-# gitconfig
+# <img src="favicon.svg" alt="gitconfig" width="64" height="64" style="vertical-align: middle"> gitconfig
 
 Git configuration settings — minimal, leveraging default/recommended `git` behaviors, but also not having to remember obscure syntax or type a novel.
 
