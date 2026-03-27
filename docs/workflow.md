@@ -2,6 +2,23 @@
 
 This is not meant to be prescriptive — just how I use `git`. Sharing in case others find it useful.
 
+```mermaid
+%%{ init: { 'look': 'handDrawn' } }%%
+gitGraph
+    commit id: "..."
+    branch feature_x
+    checkout feature_x
+    commit id: "work"
+    commit id: "more work"
+    checkout main
+    commit id: "other work"
+    checkout feature_x
+    commit id: "rebase"
+    checkout main
+    merge feature_x id: "merge --no-ff"
+    commit id: "next"
+```
+
 ## Branch Early
 
 Shift mindset to **branch early**.
@@ -27,6 +44,19 @@ Doing this pays down your "merge debt" as you go as opposed to leaving it all fo
 ## Releasing
 
 When you've got a branch that's ready for mainline, sync once more from main, and then choose from the following merge options.
+
+```mermaid
+%%{ init: { 'look': 'handDrawn' } }%%
+flowchart TD
+    Ready["Branch ready for main"] --> Sync["Sync from main"]
+    Sync --> Decision{"Can individual commits be reverted independently?"}
+    Decision -->|Yes| Rebase["Rebase + merge --no-ff"]
+    Decision -->|No| Squash["Squash merge"]
+    Rebase --> Push["Push to main"]
+    Squash --> Push
+    Rebase -.-> Conflicts{"Conflict pain?"}
+    Conflicts -->|Abort| Squash
+```
 
 ### Rebase Option (preferred)
 
