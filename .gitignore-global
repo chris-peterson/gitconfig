@@ -1,0 +1,3 @@
+# Deployed by update.sh to ~/.config/git/ignore, which git reads for every repo.
+**/.claude/settings.local.json
+.playwright-mcp/

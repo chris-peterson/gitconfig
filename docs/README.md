@@ -8,6 +8,12 @@ A tabbed config file — make edits with your favorite text editor.
 
 After making any changes, run `./update.sh` to take effect.
 
+## `.gitignore-global`
+
+Patterns to ignore in every repository, instead of repeating them in each project's `.gitignore`.
+
+`update.sh` copies this file to `~/.config/git/ignore`, [where `git` looks for them](https://git-scm.com/docs/gitignore).
+
 ## Configuration
 
 ```ini
