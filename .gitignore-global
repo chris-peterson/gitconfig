@@ -1,3 +1,6 @@
 # Deployed by update.sh to ~/.config/git/ignore, which git reads for every repo.
 **/.claude/settings.local.json
+# EnterWorktree checks out here. Untracked, a nested worktree stages as an
+# embedded git repo the first time anything runs `git add -A` in the parent.
+**/.claude/worktrees/
 .playwright-mcp/
