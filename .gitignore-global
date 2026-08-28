@@ -1,4 +1,5 @@
+.DS_Store
 **/.claude/settings.local.json
 **/.claude/worktrees/
 .playwright-mcp/
-.DS_Store
+__pycache__/
