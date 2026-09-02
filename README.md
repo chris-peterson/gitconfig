@@ -1,102 +1,81 @@
-# Overview
+# gitconfig
 
-Contains my git config settings.  I try to keep this to the minimum possible, leveraging default/recommended `git` behaviors, but also not having to remember obscure syntax or type a novel.
+My `git` configuration, deployed into `$HOME` by `update.sh`.
 
-## `.gitconfig`
-A tabbed config file, make edits with your favorite text editor.
+What the settings and aliases do, and the workflow they support, is on the docs
+site: <https://chris-peterson.github.io/gitconfig/>. This file is for
+maintaining the repo.
 
-After making any changes, `./update.sh` to take effect.
+## Layout
 
-## `.gitignore-global`
+| Path | Deployed to | Holds |
+| --- | --- | --- |
+| `.gitconfig` | `~/.gitconfig` | settings and aliases |
+| `.gitconfig-public` | `~/.gitconfig-public` | the email address used on public forges |
+| `.gitignore-global` | `~/.config/git/ignore` | ignore patterns for every repository |
+| `update.sh` | | copies the three files above into place (`just install`) |
+| `docs/` | GitHub Pages | the docs site (`just docs` serves it locally) |
 
-Patterns to ignore in every repository, instead of repeating them in each project's `.gitignore`.
+## Applying a change
 
-`update.sh` copies this file to `~/.config/git/ignore`, [where `git` looks for them](https://git-scm.com/docs/gitignore).
-
-## Features
-
-### Aliases
-
-#### `main`
-
-Print out the main/default branch
-
-#### `up`
-
-Update repository (main/default branch) and prune remotes
-
-#### `web`
-
-Navigate to the web UX (e.g. on GitHub/GitLab, etc)
-
-## My Git Workflow
-
-This is not meant to be prescriptive, this is just how _I_ use `git`.  Sharing in case others find it useful.
-
-### Branch Early
-
-Shift mindset to **branch early**.
-
-About to do something (even something small)?
-
-`git checkout -b feature_x`
-
-It doesn't cost anything, and gives you an opportunity to catch mistakes without impacting others.
-
-### Stay Current
-
-Rebase often from `main` into your branch:
-
-  `git pull -p; git rebase origin/main`
-
-Doing this pays down your "merge debt" as you go as opposed to leaving it all for the end.
-
-### Releasing
-
-When you've got a branch that's ready for mainline, [sync once more from main](#stay-current), and then choose
-from the following merge options:
-
-#### Rebase Option (preferred)
-
-Choose this option when you have discrete commits that you want to preserve
-(_litmus test:_ could individual commits be reverted independently?)
+Edit the file (`.gitconfig` is tab-indented), then:
 
 ```sh
-git rebase origin/main
-git checkout main
-
-git merge feature_x --no-ff
-git push
+./update.sh
 ```
 
-`rebase` stacks up all your changes "on top of" `main`.  Doing so:
-
-* emphasizes your changes (as if they happened now at the HEAD of `main`)
-* creates git histories that you can visualize (related commits grouped together)
-* orders git history by when features were _merged_ (not when individual code fragments were written)
-
-`no-ff` creates a commit for the merge itself so that you can easily revert the entire feature.
-
-NOTE: If you end up in "rebasing mode" where you're having to solve conflicts (sometimes over and over again),
-then it might not be worth it and you might want to `git rebase --abort` and consider [squashing](#squash-option) instead.
-
-#### Squash Option
-
-Choose this option if the feature is atomic (_litmus test:_ it's all or nothing - all changes have to be either applied, or reverted together).
+Each target is moved aside to `<name>.old` before the copy, so one generation
+of the previous version survives. Read back what `git` resolves to:
 
 ```sh
-git checkout main
-git merge feature_x --squash
-git commit -m "<message describing entire change set>"
-git push
+git config --list --show-origin
 ```
 
-### Considerations
+## Public identity
 
-How the branch is shared has implications to which methods you might favor.
+`.gitconfig` sets `user.name` for every repository and pulls `user.email` from
+`.gitconfig-public` through four `includeIf` conditions: github.com and
+gitlab.com, each over https and ssh. The pattern, and the behavior of a
+repository that matches none of them, is on the
+[Multiple Contexts](https://chris-peterson.github.io/gitconfig/#/contexts) page.
 
-If you're working alone, go nuts, `git commit --amend` and `git rebase -i` to your heart's content.
+`user.useConfigOnly` is on, so a repository matching none of them refuses to
+commit rather than building an address out of your username and the machine's
+hostname. A repository with no remote does too, which is worth knowing before
+the first commit in a scratch repo.
 
-If you're working with others, try to avoid `git rebase` as it mutates commits which can conflict when they `git pull`.  An exception to this is when you want to rebase from mainline, in which case, just communicate that you're doing so; that way, everyone can stand on the same footing.
+Adding a forge takes both URL shapes, since `hasconfig` matches the remote URL
+as written:
 
-Once you've shared code out for review, its best to avoid mutating history as it invalidates what has been reviewed.  When you've incorporated all the feedback, however, I like to tidy up the history with judicious commit amendments/consolidations.
+```ini
+[includeIf "hasconfig:remote.*.url:https://example.com/**"]
+	path = ~/.gitconfig-public
+[includeIf "hasconfig:remote.*.url:git@example.com:*/**"]
+	path = ~/.gitconfig-public
+```
+
+## Docs site
+
+`docs/` is a [Docsify](https://docsify.js.org) site, which renders the markdown
+in the browser instead of building it.
+
+| File | Role |
+| --- | --- |
+| `docs/README.md` | home page |
+| `docs/<name>.md` | one page per route, reached as `#/<name>` |
+| `docs/_sidebar.md` | the nav; a new page needs an entry here |
+| `docs/index.html` | loads the shared docsify bootstrap from `chris-peterson.github.io/js` and declares the project name, its code languages, and its plugins |
+
+Preview it on <http://localhost:3000> with:
+
+```sh
+just docs
+```
+
+The shared bootstrap treats a loopback origin as the hub itself, so it looks for
+the hub's theme CSS and `projects.yml` on the local server and the preview comes
+up unstyled. Content, links, sidebar, and mermaid all render; the site chrome is
+what's missing.
+
+`.github/workflows/docs.yml` publishes `docs/` to GitHub Pages on pushes to
+`main` that touch `docs/**`.

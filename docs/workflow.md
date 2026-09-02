@@ -43,7 +43,7 @@ Doing this pays down your "merge debt" as you go as opposed to leaving it all fo
 
 ## Releasing
 
-When you've got a branch that's ready for mainline, sync once more from main, and then choose from the following merge options.
+When you've got a branch that's ready for mainline, [sync once more from main](/workflow?id=stay-current), and then choose from the following merge options.
 
 ```mermaid
 %%{ init: { 'look': 'handDrawn' } }%%

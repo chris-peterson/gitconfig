@@ -1,5 +1,7 @@
 [user]
 	name = Chris Peterson
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-useruseConfigOnly
+	useConfigOnly = true
 
 # https://git-scm.com/docs/git-config#Documentation/git-config.txt-includeIfltconditiongt
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
