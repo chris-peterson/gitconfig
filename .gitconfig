@@ -19,6 +19,8 @@
 [core]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
 	autocrlf = input
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor
+	editor = hx
 
 [push]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
@@ -34,11 +36,11 @@
 
 [diff]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool
-	tool = kdiff3
+	tool = vscode
 
 [merge]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool
-	tool = kdiff3
+	tool = vscode
 
 [mergetool]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolkeepBackup

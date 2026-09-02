@@ -29,10 +29,11 @@ Git reads those deployed copies, so run `./update.sh` again after every edit.
 | [`user.useConfigOnly`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-useruseConfigOnly) `= true` | A repository with no configured email refuses to commit, rather than guessing an address from your username and hostname. |
 | [`init.defaultBranch`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-initdefaultBranch) `= main` | New repositories start on `main`. |
 | [`core.autocrlf`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf) `= input` | CRLF becomes LF on commit; checkouts are left as stored. |
+| [`core.editor`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor) `= hx` | Commit messages, interactive rebase todos, and `git config --edit` open in Helix. |
 | [`push.autoSetupRemote`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote) `= true` | `git push` on a new branch sets its upstream itself. |
 | [`pull.rebase`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase) `= true` | `git pull` replays your local commits on top of the fetched branch. |
 | [`rebase.autoStash`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoStash) `= true` | A rebase stashes uncommitted work first and restores it after. |
-| [`diff.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool) / [`merge.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool) `= kdiff3` | `git difftool` and `git mergetool` open kdiff3. |
+| [`diff.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool) / [`merge.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool) `= vscode` | `git difftool` and `git mergetool` open VS Code's diff and 3-way merge views. |
 | [`mergetool.keepBackup`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolkeepBackup) `= false` | Resolving a conflict leaves no `.orig` file behind. |
 
 Commits in a repository whose `origin` is on GitHub or GitLab use the email
