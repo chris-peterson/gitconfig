@@ -36,15 +36,18 @@
 
 [diff]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool
-	tool = vscode
+	tool = kdiff3
 
 [merge]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool
-	tool = vscode
+	tool = kdiff3
 
 [mergetool]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolkeepBackup
 	keepBackup = false
+	# difftool.prompt defaults to this, so one key covers both tools
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolprompt
+	prompt = false
 
 [alias]
 	main = !"git remote show origin | sed -n '/HEAD branch/s/.*: //p'"

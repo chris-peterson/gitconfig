@@ -33,8 +33,9 @@ Git reads those deployed copies, so run `./update.sh` again after every edit.
 | [`push.autoSetupRemote`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote) `= true` | `git push` on a new branch sets its upstream itself. |
 | [`pull.rebase`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase) `= true` | `git pull` replays your local commits on top of the fetched branch. |
 | [`rebase.autoStash`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoStash) `= true` | A rebase stashes uncommitted work first and restores it after. |
-| [`diff.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool) / [`merge.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool) `= vscode` | `git difftool` and `git mergetool` open VS Code's diff and 3-way merge views. |
+| [`diff.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftool) / [`merge.tool`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetool) `= kdiff3` | `git difftool` and `git mergetool` open KDiff3's diff and 3-way merge views. |
 | [`mergetool.keepBackup`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolkeepBackup) `= false` | Resolving a conflict leaves no `.orig` file behind. |
+| [`mergetool.prompt`](https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergetoolprompt) `= false` | `git mergetool` and `git difftool` launch the tool directly instead of asking first for each file. |
 
 Commits in a repository whose `origin` is on GitHub or GitLab use the email
 address from `.gitconfig-public`, selected by an `includeIf` condition on the

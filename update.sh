@@ -8,3 +8,13 @@ cp ./.gitconfig-public ~/.gitconfig-public
 mkdir -p ~/.config/git
 mv -f ~/.config/git/ignore ~/.config/git/ignore.old 2>/dev/null
 cp ./.gitignore-global ~/.config/git/ignore
+
+echo 'global settings'
+echo ''
+
+echo 'config:'
+git config --global --list | sort
+
+echo ''
+echo 'ignore:'
+cat ~/.config/git/ignore
