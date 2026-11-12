@@ -3,3 +3,4 @@
 **/.claude/worktrees/
 .playwright-mcp/
 __pycache__/
+.fathom/
